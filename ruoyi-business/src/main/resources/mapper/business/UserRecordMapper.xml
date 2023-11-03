@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.UserRecordMapper">
+    
+    <resultMap type="UserRecord" id="UserRecordResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="chargeType"    column="charge_type"    />
+        <result property="chargePrice"    column="charge_price"    />
+        <result property="chargeTime"    column="charge_time"    />
+        <result property="chargeCode"    column="charge_code"    />
+        <result property="remark"    column="remark"    />
+        <result property="memberType"    column="member_type"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectUserRecordVo">
+        select id, user_id, charge_type, charge_price, charge_time, charge_code, remark, member_type, create_by, create_time, update_by, update_time from user_record
+    </sql>
+
+    <select id="selectUserRecordList" parameterType="UserRecord" resultMap="UserRecordResult">
+        <include refid="selectUserRecordVo"/>
+        <where>  
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="chargeType != null  and chargeType != ''"> and charge_type = #{chargeType}</if>
+            <if test="chargePrice != null  and chargePrice != ''"> and charge_price = #{chargePrice}</if>
+            <if test="chargeTime != null  and chargeTime != ''"> and charge_time = #{chargeTime}</if>
+            <if test="chargeCode != null  and chargeCode != ''"> and charge_code = #{chargeCode}</if>
+            <if test="memberType != null  and memberType != ''"> and member_type = #{memberType}</if>
+        </where>
+    </select>
+    
+    <select id="selectUserRecordById" parameterType="Long" resultMap="UserRecordResult">
+        <include refid="selectUserRecordVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertUserRecord" parameterType="UserRecord" useGeneratedKeys="true" keyProperty="id">
+        insert into user_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null and userId != ''">user_id,</if>
+            <if test="chargeType != null">charge_type,</if>
+            <if test="chargePrice != null">charge_price,</if>
+            <if test="chargeTime != null">charge_time,</if>
+            <if test="chargeCode != null">charge_code,</if>
+            <if test="remark != null">remark,</if>
+            <if test="memberType != null">member_type,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="chargeType != null">#{chargeType},</if>
+            <if test="chargePrice != null">#{chargePrice},</if>
+            <if test="chargeTime != null">#{chargeTime},</if>
+            <if test="chargeCode != null">#{chargeCode},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="memberType != null">#{memberType},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUserRecord" parameterType="UserRecord">
+        update user_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="chargeType != null">charge_type = #{chargeType},</if>
+            <if test="chargePrice != null">charge_price = #{chargePrice},</if>
+            <if test="chargeTime != null">charge_time = #{chargeTime},</if>
+            <if test="chargeCode != null">charge_code = #{chargeCode},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="memberType != null">member_type = #{memberType},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserRecordById" parameterType="Long">
+        delete from user_record where id = #{id}
+    </delete>
+
+    <delete id="deleteUserRecordByIds" parameterType="String">
+        delete from user_record where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

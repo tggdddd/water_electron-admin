@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.ChargeMapper">
+    
+    <resultMap type="Charge" id="ChargeResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="price"    column="price"    />
+        <result property="months"    column="months"    />
+        <result property="weeks"    column="weeks"    />
+        <result property="days"    column="days"    />
+        <result property="hours"    column="hours"    />
+        <result property="weight"    column="weight"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectChargeVo">
+        select id, name, price, months,weeks,days,hours, weight, create_by, create_time, update_by, update_time from charge
+    </sql>
+
+    <select id="selectChargeList" parameterType="Charge" resultMap="ChargeResult">
+        <include refid="selectChargeVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="price != null  and price != ''"> and price = #{price}</if>
+        </where>
+    </select>
+    
+    <select id="selectChargeById" parameterType="Long" resultMap="ChargeResult">
+        <include refid="selectChargeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCharge" parameterType="Charge" useGeneratedKeys="true" keyProperty="id">
+        insert into charge
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="price != null">price,</if>
+            <if test="months != null">months,</if>
+            <if test="weeks != null">weeks,</if>
+            <if test="days != null">days,</if>
+            <if test="hours != null">hours,</if>
+            <if test="weight != null">weight,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="price != null">#{price},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="months != null">#{months},</if>
+            <if test="weeks != null">#{weeks},</if>
+            <if test="days != null">#{days},</if>
+            <if test="hours != null">#{hours},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCharge" parameterType="Charge">
+        update charge
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="months != null">months = #{months},</if>
+            <if test="weeks != null">weeks = #{weeks},</if>
+            <if test="days != null">days = #{days},</if>
+            <if test="hours != null">hours = #{hours},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteChargeById" parameterType="Long">
+        delete from charge where id = #{id}
+    </delete>
+
+    <delete id="deleteChargeByIds" parameterType="String">
+        delete from charge where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

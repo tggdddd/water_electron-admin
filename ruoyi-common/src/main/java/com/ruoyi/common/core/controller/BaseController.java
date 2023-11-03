@@ -54,7 +54,9 @@ public class BaseController
     {
         PageUtils.startPage();
     }
+    protected void startPagePlus(){
 
+    }
     /**
      * 设置请求排序数据
      */

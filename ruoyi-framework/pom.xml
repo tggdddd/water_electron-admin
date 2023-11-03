@@ -47,6 +47,10 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
         <!-- 获取系统信息 -->
         <dependency>
             <groupId>com.github.oshi</groupId>
