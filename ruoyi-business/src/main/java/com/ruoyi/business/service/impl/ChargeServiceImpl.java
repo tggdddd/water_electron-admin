@@ -1,6 +1,8 @@
 package com.ruoyi.business.service.impl;
 
 import java.util.List;
+
+import com.github.yulichang.base.MPJBaseServiceImpl;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +17,7 @@ import com.ruoyi.business.service.IChargeService;
  * @date 2023-11-03
  */
 @Service
-public class ChargeServiceImpl implements IChargeService 
+public class ChargeServiceImpl extends MPJBaseServiceImpl<ChargeMapper,Charge> implements IChargeService
 {
     @Autowired
     private ChargeMapper chargeMapper;

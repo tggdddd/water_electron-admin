@@ -1,6 +1,8 @@
 package com.ruoyi.business.service;
 
 import java.util.List;
+
+import com.github.yulichang.base.MPJBaseService;
 import com.ruoyi.business.domain.Charge;
 
 /**
@@ -9,7 +11,7 @@ import com.ruoyi.business.domain.Charge;
  * @author ruoyi
  * @date 2023-11-03
  */
-public interface IChargeService 
+public interface IChargeService extends MPJBaseService<Charge>
 {
     /**
      * 查询充值选项;

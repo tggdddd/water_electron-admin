@@ -1,7 +1,10 @@
 package com.ruoyi.business.mapper;
 
 import java.util.List;
+
+import com.github.yulichang.base.MPJBaseMapper;
 import com.ruoyi.business.domain.Charge;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 充值选项;Mapper接口
@@ -9,7 +12,8 @@ import com.ruoyi.business.domain.Charge;
  * @author ruoyi
  * @date 2023-11-03
  */
-public interface ChargeMapper 
+@Mapper
+public interface ChargeMapper extends MPJBaseMapper<Charge>
 {
     /**
      * 查询充值选项;

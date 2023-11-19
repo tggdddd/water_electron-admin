@@ -51,7 +51,6 @@ public class SysLoginService
 
     @Autowired
     private ISysConfigService configService;
-
     /**
      * 登录验证
      * 

@@ -146,8 +146,22 @@ public class TokenService
      */
     public void refreshToken(LoginUser loginUser)
     {
+        refreshToken(loginUser,false);
+    }
+
+    /**
+     * 刷新令牌有效期
+     *
+     * @param loginUser 登录信息
+     */
+    public void refreshToken(LoginUser loginUser,boolean forever)
+    {
         loginUser.setLoginTime(System.currentTimeMillis());
-        loginUser.setExpireTime(loginUser.getLoginTime() + expireTime * MILLIS_MINUTE);
+        if (forever) {
+            loginUser.setExpireTime(loginUser.getLoginTime() + MILLIS_MINUTE * MILLIS_MINUTE);
+        }else {
+            loginUser.setExpireTime(loginUser.getLoginTime() + expireTime * MILLIS_MINUTE);
+        }
         // 根据uuid将loginUser缓存
         String userKey = getTokenKey(loginUser.getToken());
         redisCache.setCacheObject(userKey, loginUser, expireTime, TimeUnit.MINUTES);

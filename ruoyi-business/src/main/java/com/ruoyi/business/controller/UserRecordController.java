@@ -1,5 +1,6 @@
 package com.ruoyi.business.controller;
 
+import java.util.Arrays;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -42,22 +43,12 @@ public class UserRecordController extends BaseController
     public TableDataInfo list(UserRecord userRecord)
     {
         startPage();
-        List<UserRecord> list = userRecordService.selectUserRecordList(userRecord);
+        List<UserRecord> list =null;
+//                userRecordService.selectUserRecordList(userRecord);
+
         return getDataTable(list);
     }
 
-    /**
-     * 导出用户充值记录列表
-     */
-    @PreAuthorize("@ss.hasPermi('business:record:export')")
-    @Log(title = "用户充值记录", businessType = BusinessType.EXPORT)
-    @PostMapping("/export")
-    public void export(HttpServletResponse response, UserRecord userRecord)
-    {
-        List<UserRecord> list = userRecordService.selectUserRecordList(userRecord);
-        ExcelUtil<UserRecord> util = new ExcelUtil<UserRecord>(UserRecord.class);
-        util.exportExcel(response, list, "用户充值记录数据");
-    }
 
     /**
      * 获取用户充值记录详细信息
@@ -66,7 +57,7 @@ public class UserRecordController extends BaseController
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
-        return success(userRecordService.selectUserRecordById(id));
+        return success(userRecordService.getById(id));
     }
 
     /**
@@ -77,7 +68,7 @@ public class UserRecordController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody UserRecord userRecord)
     {
-        return toAjax(userRecordService.insertUserRecord(userRecord));
+        return toAjax(userRecordService.save(userRecord));
     }
 
     /**
@@ -88,7 +79,7 @@ public class UserRecordController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody UserRecord userRecord)
     {
-        return toAjax(userRecordService.updateUserRecord(userRecord));
+        return toAjax(userRecordService.updateById(userRecord));
     }
 
     /**
@@ -99,6 +90,6 @@ public class UserRecordController extends BaseController
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
-        return toAjax(userRecordService.deleteUserRecordByIds(ids));
+        return toAjax(userRecordService.removeByIds(Arrays.asList(ids)));
     }
 }

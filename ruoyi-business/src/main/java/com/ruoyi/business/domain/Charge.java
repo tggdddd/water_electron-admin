@@ -1,9 +1,12 @@
 package com.ruoyi.business.domain;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.math.BigDecimal;
 
 /**
  * 充值选项;对象 charge
@@ -13,6 +16,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@TableName("charge")
 public class Charge extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
@@ -31,35 +35,35 @@ public class Charge extends BaseEntity {
      * 价格
      */
     @Excel(name = "价格")
-    private String price;
+    private BigDecimal price;
 
 
     /**
      * 月
      */
     @Excel(name = "月")
-    private String months;
+    private Integer months = 0;
 
 
     /**
      * 周
      */
     @Excel(name = "周")
-    private String weeks;
+    private Integer weeks = 0;
 
 
     /**
      * 天
      */
     @Excel(name = "天")
-    private String days;
+    private Integer days = 0;
 
 
     /**
      * 小时
      */
     @Excel(name = "小时")
-    private String hours;
+    private Integer hours = 0;
 
 
     /**

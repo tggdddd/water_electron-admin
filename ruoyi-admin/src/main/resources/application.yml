@@ -38,7 +38,6 @@ logging:
   level:
     com.ruoyi: debug
     org.springframework: warn
-
 # 用户配置
 user:
   password:
@@ -62,11 +61,6 @@ spring:
       max-file-size: 10MB
       # 设置总上传的文件大小
       max-request-size: 20MB
-  # 服务模块
-  devtools:
-    restart:
-      # 热部署开关
-      enabled: true
   # redis 配置
   redis:
     # 地址
@@ -90,6 +84,28 @@ spring:
         # #连接池最大阻塞等待时间（使用负值表示没有限制）
         max-wait: -1ms
 
+  mail:
+    #smtp服务主机  qq邮箱则为smtp.qq.com
+    host: smtp.10086.cn
+    #服务协议
+    protocol: smtp
+    port: 25
+    # 编码集
+    default-encoding: UTF-8
+    #发送名称
+    nickname: 啊啊啊啊
+    #发送邮件的账户
+    username: 15014586591@139.com
+    #授权码
+    password: 963ca01e0fe006e6ca00
+    test-connection: true
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
 # token配置
 token:
   # 令牌自定义标识
@@ -99,15 +115,15 @@ token:
   # 令牌有效期（默认30分钟）
   expireTime: 30
 
-# MyBatis配置
-mybatis:
-  # 搜索指定包别名
-  typeAliasesPackage: com.ruoyi.**.domain
-  # 配置mapper的扫描，找到所有的mapper.xml映射文件
-  mapperLocations: classpath*:mapper/**/*Mapper.xml
-  # 加载全局的配置文件
-  configLocation: classpath:mybatis/mybatis-config.xml
-
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  type-aliases-package: com.ruoyi.**.domain
+  global-config:
+    db-config:
+      table-underline: true
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      logic-delete-field: del_flag
 # PageHelper分页插件
 pagehelper:
   helperDialect: mysql

@@ -21,6 +21,7 @@ public class BaseEntity implements Serializable
 
     /** 搜索值 */
     @JsonIgnore
+    @TableField(exist = false)
     private String searchValue;
 
     /** 创建者 */

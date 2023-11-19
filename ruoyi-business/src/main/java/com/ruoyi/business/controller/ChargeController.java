@@ -73,11 +73,11 @@ public class ChargeController extends BaseController {
     @Log(title = "充值套餐", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Charge charge) {
-        try {
-            Float v = Float.valueOf(charge.getPrice());
-        } catch (Exception e) {
-            return AjaxResult.error("价格格式有误");
-        }
+//        try {
+//            Float v = Float.valueOf(charge.getPrice());
+//        } catch (Exception e) {
+//            return AjaxResult.error("价格格式有误");
+//        }
         return toAjax(chargeService.insertCharge(charge));
     }
 
@@ -88,11 +88,11 @@ public class ChargeController extends BaseController {
     @Log(title = "充值套餐", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Charge charge) {
-        try {
-            Float v = Float.valueOf(charge.getPrice());
-        } catch (Exception e) {
-            return AjaxResult.error("价格格式有误");
-        }
+//        try {
+//            Float v = Float.valueOf(charge.getPrice());
+//        } catch (Exception e) {
+//            return AjaxResult.error("价格格式有误");
+//        }
         return toAjax(chargeService.updateCharge(charge));
     }
 

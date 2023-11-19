@@ -36,6 +36,11 @@
     <dependencyManagement>
         <dependencies>
 
+            <dependency>
+                <groupId>com.github.yulichang</groupId>
+                <artifactId>mybatis-plus-join-boot-starter</artifactId>
+                <version>1.4.5</version>
+            </dependency>
             <!--            mybatisPlus-->
             <dependency>
                 <groupId>com.baomidou</groupId>

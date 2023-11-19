@@ -9,14 +9,6 @@ export function listUser(query) {
   })
 }
 
-// 查询用户信息详细
-export function getUser(userId) {
-  return request({
-    url: '/business/user/' + userId,
-    method: 'get'
-  })
-}
-
 // 新增用户信息
 export function addUser(data) {
   return request({
@@ -40,5 +32,30 @@ export function delUser(userId) {
   return request({
     url: '/business/user/' + userId,
     method: 'delete'
+  })
+}
+
+// 查询用户信息详细
+export function getUser(userId) {
+  return request({
+    url: '/business/user/' + userId,
+    method: 'get'
+  })
+}
+//获取充值记录
+export function getUserChargeRecord(userId,params) {
+  return request({
+    url: '/business/user/charge/' + userId,
+    method: 'get',
+    params:params
+  })
+}
+
+//账号充值
+export function userChargeApi(userId,params) {
+  return request({
+    url: '/business/user/charge/' + userId,
+    method: 'post',
+    data:params
   })
 }
